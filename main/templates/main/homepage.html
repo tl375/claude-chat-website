@@ -214,8 +214,47 @@
             }, delay);
         }
         
+        // Enhanced input interactions
+        function addInputFocusEffects() {
+            chatInput.addEventListener('focus', function() {
+                this.classList.add('animate-scale-in');
+                setTimeout(() => {
+                    this.classList.remove('animate-scale-in');
+                }, 300);
+            });
+            
+            chatInput.addEventListener('invalid', function() {
+                this.classList.add('animate-shake');
+                setTimeout(() => {
+                    this.classList.remove('animate-shake');
+                }, 500);
+            });
+        }
+        
+        // Enhanced button interactions
+        function addButtonEffects() {
+            sendButton.addEventListener('mousedown', function() {
+                this.style.transform = 'translateY(0) scale(0.95)';
+            });
+            
+            sendButton.addEventListener('mouseup', function() {
+                this.style.transform = '';
+            });
+            
+            sendButton.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        }
+        
+        // Initialize all animations and effects
+        function initializeAllAnimations() {
+            initPageLoadAnimations();
+            addInputFocusEffects();
+            addButtonEffects();
+        }
+        
         // Initialize animations when page loads
-        window.addEventListener('load', initPageLoadAnimations);
+        window.addEventListener('load', initializeAllAnimations);
     </script>
 </body>
 </html>
