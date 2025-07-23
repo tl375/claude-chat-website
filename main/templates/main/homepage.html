@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
 </head>
 <body>
-    <header class="header">
+    <header class="header animate-on-load" data-animation-delay="0">
         <div class="container">
             <div class="header-content">
                 <div class="logo">Tom Lim</div>
@@ -21,7 +21,7 @@
         </div>
     </header>
 
-    <main class="main-content">
+    <main class="main-content animate-on-load" data-animation-delay="100">
         <div class="container">
             <div class="chat-section">
                 <div class="chat-header">
@@ -58,7 +58,7 @@
         </div>
     </main>
 
-    <footer class="footer">
+    <footer class="footer animate-on-load" data-animation-delay="200">
         <div class="container">
             <p>&copy; 2024 Tom Lim. Powered by OpenAI.</p>
         </div>
@@ -70,7 +70,7 @@
         const sendButton = document.getElementById('sendButton');
         const typingIndicator = document.getElementById('typingIndicator');
 
-        function addMessage(content, isUser) {
+        function addMessage(content, isUser, withTypingEffect = false) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
             
@@ -82,8 +82,6 @@
             messageContent.className = 'message-content';
             
             const messageText = document.createElement('p');
-            messageText.textContent = content;
-            
             const messageTime = document.createElement('span');
             messageTime.className = 'message-time';
             messageTime.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
@@ -94,7 +92,42 @@
             messageDiv.appendChild(messageContent);
             
             chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Add typing effect for bot messages
+            if (!isUser && withTypingEffect) {
+                typeWriterEffect(messageText, content, 30);
+            } else {
+                messageText.textContent = content;
+            }
+            
+            // Smooth scroll to bottom
+            setTimeout(() => {
+                chatMessages.scrollTo({
+                    top: chatMessages.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+        
+        function typeWriterEffect(element, text, speed = 50) {
+            element.textContent = '';
+            let i = 0;
+            
+            function typeChar() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeChar, speed);
+                    
+                    // Auto-scroll during typing
+                    chatMessages.scrollTo({
+                        top: chatMessages.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            typeChar();
         }
 
         function showTypingIndicator() {
@@ -129,13 +162,13 @@
                 const data = await response.json();
                 
                 if (data.response) {
-                    addMessage(data.response, false);
+                    addMessage(data.response, false, true);
                 } else {
-                    addMessage('Sorry, I encountered an error processing your request.', false);
+                    addMessage('Sorry, I encountered an error processing your request.', false, true);
                 }
             } catch (error) {
                 console.error('Error:', error);
-                addMessage('Sorry, I\'m having trouble connecting right now. Please try again.', false);
+                addMessage('Sorry, I\'m having trouble connecting right now. Please try again.', false, true);
             } finally {
                 hideTypingIndicator();
                 sendButton.disabled = false;
@@ -154,6 +187,74 @@
 
         // Focus on input when page loads
         chatInput.focus();
+        
+        // Page Load Animations
+        function initPageLoadAnimations() {
+            const elementsToAnimate = document.querySelectorAll('.animate-on-load');
+            
+            elementsToAnimate.forEach((element, index) => {
+                const delay = parseInt(element.dataset.animationDelay) || 0;
+                
+                setTimeout(() => {
+                    element.classList.add('animate-slide-up');
+                }, delay);
+            });
+        }
+        
+        // Animation utilities
+        function addClassWithDelay(element, className, delay = 0) {
+            setTimeout(() => {
+                element.classList.add(className);
+            }, delay);
+        }
+        
+        function removeClassWithDelay(element, className, delay = 0) {
+            setTimeout(() => {
+                element.classList.remove(className);
+            }, delay);
+        }
+        
+        // Enhanced input interactions
+        function addInputFocusEffects() {
+            chatInput.addEventListener('focus', function() {
+                this.classList.add('animate-scale-in');
+                setTimeout(() => {
+                    this.classList.remove('animate-scale-in');
+                }, 300);
+            });
+            
+            chatInput.addEventListener('invalid', function() {
+                this.classList.add('animate-shake');
+                setTimeout(() => {
+                    this.classList.remove('animate-shake');
+                }, 500);
+            });
+        }
+        
+        // Enhanced button interactions
+        function addButtonEffects() {
+            sendButton.addEventListener('mousedown', function() {
+                this.style.transform = 'translateY(0) scale(0.95)';
+            });
+            
+            sendButton.addEventListener('mouseup', function() {
+                this.style.transform = '';
+            });
+            
+            sendButton.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        }
+        
+        // Initialize all animations and effects
+        function initializeAllAnimations() {
+            initPageLoadAnimations();
+            addInputFocusEffects();
+            addButtonEffects();
+        }
+        
+        // Initialize animations when page loads
+        window.addEventListener('load', initializeAllAnimations);
     </script>
 </body>
 </html>
