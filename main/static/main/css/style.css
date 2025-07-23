@@ -1686,3 +1686,284 @@ body::before {
         padding: 1.5rem;
     }
 }
+
+/* Professional Error Handling & Status - Phase 3 */
+
+/* Connection Status */
+.professional-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--background-secondary);
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-light);
+}
+
+.connection-status {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    transition: all var(--animation-fast) ease;
+}
+
+.connection-status.connected {
+    background: rgba(104, 211, 145, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(104, 211, 145, 0.2);
+}
+
+.connection-status.connecting {
+    background: rgba(237, 137, 54, 0.1);
+    color: var(--warning);
+    border: 1px solid rgba(237, 137, 54, 0.2);
+    animation: pulse 2s infinite;
+}
+
+.connection-status.disconnected {
+    background: rgba(245, 101, 101, 0.1);
+    color: #f56565;
+    border: 1px solid rgba(245, 101, 101, 0.2);
+}
+
+.professional-info {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* Professional Error Messages */
+.error-message {
+    border-left: 4px solid var(--warning);
+    background: rgba(237, 137, 54, 0.05);
+}
+
+.error-avatar {
+    background: var(--warning) !important;
+    color: white;
+}
+
+.error-content {
+    background: rgba(237, 137, 54, 0.08) !important;
+    border-color: rgba(237, 137, 54, 0.2) !important;
+}
+
+.error-title {
+    font-weight: 600;
+    color: var(--warning);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.error-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0 0.5rem 0;
+    flex-wrap: wrap;
+}
+
+.retry-button, .help-button {
+    background: transparent;
+    border: 1px solid var(--border-medium);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all var(--animation-fast) ease;
+    font-weight: 500;
+}
+
+.retry-button:hover {
+    background: var(--text-secondary);
+    color: white;
+    border-color: var(--text-secondary);
+}
+
+.help-button:hover {
+    background: var(--text-primary);
+    color: white;
+    border-color: var(--text-primary);
+}
+
+/* Professional Loading States */
+.loading-spinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 0.3rem;
+}
+
+.send-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.send-btn:disabled .loading-spinner {
+    border-color: rgba(113, 128, 150, 0.3);
+    border-top-color: var(--text-secondary);
+}
+
+/* Enhanced Typing Indicator */
+.typing-indicator {
+    background: var(--background);
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.typing-indicator::before {
+    content: 'AI is thinking';
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-right: 0.5rem;
+    font-weight: 500;
+}
+
+/* Professional Message Enhancements */
+.message {
+    position: relative;
+}
+
+.message:hover .message-actions {
+    opacity: 1;
+}
+
+.message-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0;
+    transition: opacity var(--animation-fast) ease;
+    display: flex;
+    gap: 0.25rem;
+}
+
+.message-action {
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--animation-fast) ease;
+}
+
+.message-action:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Professional Input Enhancements */
+#chatInput {
+    position: relative;
+}
+
+#chatInput:invalid {
+    border-color: var(--warning);
+    box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.1);
+}
+
+#chatInput.error {
+    border-color: #f56565;
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Professional Animations */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Professional Tooltips */
+.tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.tooltip::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--animation-fast) ease;
+    z-index: 1000;
+}
+
+.tooltip:hover::before {
+    opacity: 1;
+}
+
+/* Professional Mobile Enhancements */
+@media (max-width: 768px) {
+    .professional-status {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .connection-status {
+        align-self: center;
+    }
+    
+    .error-actions {
+        justify-content: center;
+    }
+    
+    .message-actions {
+        position: static;
+        opacity: 1;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .professional-status {
+        padding: 0.5rem;
+    }
+    
+    .error-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .retry-button, .help-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

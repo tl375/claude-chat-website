@@ -94,6 +94,10 @@
                 <div class="chat-header">
                     <h1>GPT Chat Assistant</h1>
                     <p>Ask me anything - I'm here to help!</p>
+                    <div class="professional-status">
+                        <div id="connectionStatus" class="connection-status connected">🟢 Connected</div>
+                        <div class="professional-info">Professional AI Assistant • Powered by OpenAI</div>
+                    </div>
                 </div>
                 
                 <div class="chat-container">
@@ -205,41 +209,190 @@
             typingIndicator.style.display = 'none';
         }
 
-        async function sendMessage() {
+        // Professional connection status tracking
+        let connectionStatus = 'connected';
+        let retryCount = 0;
+        const maxRetries = 3;
+        
+        function updateConnectionStatus(status) {
+            connectionStatus = status;
+            const statusIndicator = document.getElementById('connectionStatus');
+            if (statusIndicator) {
+                statusIndicator.className = `connection-status ${status}`;
+                statusIndicator.textContent = status === 'connected' ? '🟢 Connected' : 
+                                           status === 'connecting' ? '🟡 Connecting...' : 
+                                           '🔴 Connection Issues';
+            }
+        }
+        
+        function showProfessionalError(error, canRetry = false) {
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'message bot-message error-message';
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar error-avatar';
+            avatar.textContent = '⚠️';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content error-content';
+            
+            const errorTitle = document.createElement('div');
+            errorTitle.className = 'error-title';
+            errorTitle.textContent = getErrorTitle(error);
+            
+            const errorDescription = document.createElement('p');
+            errorDescription.textContent = getErrorDescription(error);
+            
+            const errorActions = document.createElement('div');
+            errorActions.className = 'error-actions';
+            
+            if (canRetry) {
+                const retryButton = document.createElement('button');
+                retryButton.className = 'retry-button';
+                retryButton.textContent = '🔄 Retry';
+                retryButton.onclick = () => {
+                    errorMessage.remove();
+                    sendMessage(true); // Retry flag
+                };
+                errorActions.appendChild(retryButton);
+            }
+            
+            const helpButton = document.createElement('button');
+            helpButton.className = 'help-button';
+            helpButton.textContent = '💬 Contact Support';
+            helpButton.onclick = () => window.open('/contact/', '_blank');
+            errorActions.appendChild(helpButton);
+            
+            const messageTime = document.createElement('span');
+            messageTime.className = 'message-time';
+            messageTime.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageContent.appendChild(errorTitle);
+            messageContent.appendChild(errorDescription);
+            messageContent.appendChild(errorActions);
+            messageContent.appendChild(messageTime);
+            errorMessage.appendChild(avatar);
+            errorMessage.appendChild(messageContent);
+            
+            chatMessages.appendChild(errorMessage);
+            
+            // Smooth scroll to bottom
+            setTimeout(() => {
+                chatMessages.scrollTo({
+                    top: chatMessages.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+        
+        function getErrorTitle(error) {
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                return 'Connection Error';
+            }
+            if (error.status >= 500) {
+                return 'Server Error';
+            }
+            if (error.status === 429) {
+                return 'Rate Limit Exceeded';
+            }
+            if (error.status >= 400) {
+                return 'Request Error';
+            }
+            return 'Unexpected Error';
+        }
+        
+        function getErrorDescription(error) {
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                return 'Unable to connect to the server. Please check your internet connection and try again.';
+            }
+            if (error.status >= 500) {
+                return 'The server encountered an internal error. Our monitoring systems have been notified and the issue is being investigated.';
+            }
+            if (error.status === 429) {
+                return 'You\'ve sent too many requests recently. Please wait a moment before trying again.';
+            }
+            if (error.status >= 400) {
+                return 'There was an issue with your request. Please try rephrasing your message.';
+            }
+            return 'An unexpected error occurred. Please try again or contact support if the issue persists.';
+        }
+        
+        async function sendMessage(isRetry = false) {
             const message = chatInput.value.trim();
-            if (!message) return;
-
-            // Add user message
-            addMessage(message, true);
-            chatInput.value = '';
+            if (!message && !isRetry) return;
+            
+            // Professional loading state
+            if (!isRetry) {
+                addMessage(message, true);
+                chatInput.value = '';
+                retryCount = 0; // Reset retry count for new messages
+            }
+            
             sendButton.disabled = true;
+            sendButton.innerHTML = '<span class="loading-spinner"></span> Sending...';
+            updateConnectionStatus('connecting');
             showTypingIndicator();
 
             try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+                
                 const response = await fetch('/chat/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        message: message
-                    })
+                        message: isRetry ? message : message
+                    }),
+                    signal: controller.signal
                 });
+                
+                clearTimeout(timeoutId);
+                updateConnectionStatus('connected');
+
+                if (!response.ok) {
+                    const error = new Error(`HTTP ${response.status}`);
+                    error.status = response.status;
+                    throw error;
+                }
 
                 const data = await response.json();
                 
                 if (data.response) {
                     addMessage(data.response, false, true);
+                    retryCount = 0; // Reset on success
                 } else {
-                    addMessage('Sorry, I encountered an error processing your request.', false, true);
+                    throw new Error('Empty response from server');
                 }
+                
             } catch (error) {
-                console.error('Error:', error);
-                addMessage('Sorry, I\'m having trouble connecting right now. Please try again.', false, true);
+                console.error('Professional Error Handler:', error);
+                updateConnectionStatus('disconnected');
+                
+                retryCount++;
+                const canRetry = retryCount < maxRetries && 
+                               (error.name === 'AbortError' || 
+                                error.name === 'TypeError' || 
+                                (error.status && error.status >= 500));
+                
+                showProfessionalError(error, canRetry);
+                
+                // Auto-retry for network issues (professional feature)
+                if (canRetry && (error.name === 'TypeError' || error.name === 'AbortError')) {
+                    setTimeout(() => {
+                        addMessage(`🔄 Automatically retrying... (Attempt ${retryCount}/${maxRetries})`, false, false);
+                        sendMessage(true);
+                    }, 2000 * retryCount); // Progressive delay
+                }
+                
             } finally {
                 hideTypingIndicator();
                 sendButton.disabled = false;
-                chatInput.focus();
+                sendButton.innerHTML = '<span>Send</span>';
+                if (!isRetry) {
+                    chatInput.focus();
+                }
             }
         }
 
