@@ -121,7 +121,7 @@ class ChatAPITestCase(TestCase):
         mock_client.chat.completions.create.side_effect = Exception("Network error")
         
         with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}):
-            with patch('main.views.random.choice') as mock_choice:
+            with patch('random.choice') as mock_choice:
                 mock_choice.return_value = "I'm temporarily unavailable. Please try your question again in a moment."
                 
                 response = self.client.post(
