@@ -967,3 +967,112 @@ a:hover {
 .p-2 { padding: 0.5rem; }
 .p-3 { padding: 1rem; }
 .p-4 { padding: 2rem; }
+
+/* Flowy Modern Minimalist Background - Issue #5 */
+
+/* Animated background gradient */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #f7fafc, #ffffff, #e2e8f0, #ffffff);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease-in-out infinite;
+    z-index: -2;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+@keyframes gradientFlow {
+    0%, 100% { 
+        background-position: 0% 50%; 
+    }
+    50% { 
+        background-position: 100% 50%; 
+    }
+}
+
+/* Organic floating shapes */
+.bg-shape {
+    position: fixed;
+    background: rgba(113, 128, 150, 0.02);
+    z-index: -1;
+    pointer-events: none;
+    animation: shapeFloat 20s ease-in-out infinite;
+}
+
+.bg-shape-1 {
+    width: 300px;
+    height: 200px;
+    top: 10%;
+    left: -50px;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation-delay: 0s;
+}
+
+.bg-shape-2 {
+    width: 200px;
+    height: 300px;
+    top: 60%;
+    right: -30px;
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+    animation-delay: 7s;
+}
+
+.bg-shape-3 {
+    width: 250px;
+    height: 150px;
+    top: 40%;
+    left: -80px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation-delay: 14s;
+}
+
+.bg-shape-4 {
+    width: 180px;
+    height: 250px;
+    top: 20%;
+    right: -60px;
+    border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+    animation-delay: 3s;
+}
+
+.bg-shape-5 {
+    width: 320px;
+    height: 180px;
+    top: 80%;
+    left: 20%;
+    border-radius: 60% 40% 40% 60% / 50% 50% 50% 50%;
+    animation-delay: 10s;
+}
+
+@keyframes shapeFloat {
+    0%, 100% { 
+        transform: translate(0, 0) rotate(0deg); 
+    }
+    25% { 
+        transform: translate(10px, -20px) rotate(1deg); 
+    }
+    50% { 
+        transform: translate(-5px, -10px) rotate(-1deg); 
+    }
+    75% { 
+        transform: translate(-10px, 5px) rotate(0.5deg); 
+    }
+}
+
+/* Accessibility: Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation: none !important;
+        background-position: 0% 50% !important;
+    }
+    
+    .bg-shape {
+        animation: none !important;
+        transform: translate(0, 0) rotate(0deg) !important;
+    }
+}
