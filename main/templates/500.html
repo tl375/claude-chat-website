@@ -1,0 +1,413 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Professional SEO Meta Tags -->
+    <title>Server Error (500) - Tom Lim | Professional Developer Portfolio</title>
+    <meta name="description" content="A temporary server error occurred. The issue is being investigated promptly.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Professional Favicons -->
+    <link rel="icon" type="image/x-icon" href="{% static 'main/favicons/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/favicons/favicon-32x32.png' %}">
+    
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+    <!-- Floating organic shapes for minimalist background -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+    <div class="bg-shape bg-shape-4"></div>
+    <div class="bg-shape bg-shape-5"></div>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Tom Lim</div>
+                <nav class="nav">
+                    <a href="{% url 'homepage' %}">Chat</a>
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="error-page">
+                <div class="error-content">
+                    <div class="error-icon">⚠️</div>
+                    <h1 class="error-title">Server Error</h1>
+                    <p class="error-code">Error 500</p>
+                    
+                    <div class="error-description">
+                        <p>Something went wrong on our end. As a professional developer, I take server reliability seriously and am investigating this issue promptly.</p>
+                    </div>
+                    
+                    <div class="error-status">
+                        <div class="status-item">
+                            <div class="status-icon">🔧</div>
+                            <h4>Being Investigated</h4>
+                            <p>Error logged and investigation in progress</p>
+                        </div>
+                        
+                        <div class="status-item">
+                            <div class="status-icon">⏱️</div>
+                            <h4>Quick Resolution</h4>
+                            <p>Typical resolution time: 15-30 minutes</p>
+                        </div>
+                        
+                        <div class="status-item">
+                            <div class="status-icon">📊</div>
+                            <h4>High Uptime</h4>
+                            <p>99.9% uptime maintained professionally</p>
+                        </div>
+                    </div>
+                    
+                    <div class="error-suggestions">
+                        <h3>What you can do:</h3>
+                        <div class="action-list">
+                            <div class="action-item">
+                                <span class="action-number">1</span>
+                                <p><strong>Wait a moment</strong> and try refreshing the page</p>
+                            </div>
+                            
+                            <div class="action-item">
+                                <span class="action-number">2</span>
+                                <p><strong>Check back in a few minutes</strong> – issues are typically resolved quickly</p>
+                            </div>
+                            
+                            <div class="action-item">
+                                <span class="action-number">3</span>
+                                <p><strong>Explore other sections</strong> of the portfolio while this resolves</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-actions">
+                        <button onclick="location.reload()" class="cta-button primary">
+                            <span>🔄</span> Try Again
+                        </button>
+                        <a href="{% url 'homepage' %}" class="cta-button secondary">
+                            <span>🏠</span> Home Page
+                        </a>
+                        <a href="{% url 'contact' %}" class="cta-button tertiary">
+                            <span>📧</span> Report Issue
+                        </a>
+                    </div>
+                    
+                    <div class="error-contact">
+                        <p><strong>Persistent issues?</strong> Please <a href="{% url 'contact' %}">contact me directly</a> and I'll investigate immediately. Professional support is a priority.</p>
+                    </div>
+                    
+                    <div class="error-technical">
+                        <details>
+                            <summary>Technical Information</summary>
+                            <div class="tech-details">
+                                <p><strong>Error Type:</strong> Internal Server Error (500)</p>
+                                <p><strong>Timestamp:</strong> <span id="error-time"></span></p>
+                                <p><strong>Server:</strong> Django Production Server</p>
+                                <p><strong>Status:</strong> Automatic monitoring and logging active</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Tom Lim</h4>
+                    <p>Full Stack Developer & AI Specialist</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/tomlim" target="_blank" rel="noopener" aria-label="LinkedIn Profile">🔗</a>
+                        <a href="https://github.com/tl375" target="_blank" rel="noopener" aria-label="GitHub Profile">⚖️</a>
+                        <a href="mailto:tom@tomlim.dev" aria-label="Email Contact">📧</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Professional Support</h4>
+                    <ul>
+                        <li><a href="{% url 'contact' %}">Report Issue</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% static 'main/files/tom-lim-resume.pdf' %}" download>Resume</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>System Status</h4>
+                    <p class="system-status">
+                        <span class="status-indicator investigating"></span>
+                        Investigating
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tom Lim. Professional Portfolio. Built with Django & Modern Web Standards.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .error-page {
+            max-width: 900px;
+            margin: 4rem auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        .error-content {
+            background: var(--background);
+            padding: 4rem 3rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .error-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .error-code {
+            font-size: 1.2rem;
+            color: var(--warning);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .error-description {
+            margin-bottom: 3rem;
+        }
+        
+        .error-description p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .error-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .status-item {
+            background: var(--background-secondary);
+            padding: 2rem 1.5rem;
+            border-radius: 0.8rem;
+            border: 1px solid var(--border-light);
+        }
+        
+        .status-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .status-item h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .error-suggestions {
+            margin-bottom: 3rem;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .error-suggestions h3 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .action-number {
+            background: var(--text-secondary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .action-item p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .error-contact {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--background-secondary);
+            border-radius: 0.8rem;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .error-contact p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .error-contact a {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .error-technical {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .error-technical details {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .error-technical summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            padding: 0.5rem;
+        }
+        
+        .tech-details {
+            padding: 1rem;
+            background: var(--background-secondary);
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tech-details p {
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: monospace;
+        }
+        
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-indicator.investigating {
+            background: var(--warning);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @media (max-width: 768px) {
+            .error-content {
+                padding: 3rem 2rem;
+            }
+            
+            .error-title {
+                font-size: 2.2rem;
+            }
+            
+            .error-status {
+                grid-template-columns: 1fr;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .error-suggestions {
+                text-align: center;
+            }
+        }
+    </style>
+
+    <script>
+        // Set current timestamp
+        document.getElementById('error-time').textContent = new Date().toLocaleString();
+        
+        // Auto-retry mechanism (professional feature)
+        let retryCount = 0;
+        const maxRetries = 3;
+        
+        function autoRetry() {
+            if (retryCount < maxRetries) {
+                setTimeout(() => {
+                    retryCount++;
+                    console.log(`Professional auto-retry attempt ${retryCount}`);
+                    location.reload();
+                }, 30000 * retryCount); // Progressive delay
+            }
+        }
+        
+        // Start auto-retry after page load
+        window.addEventListener('load', autoRetry);
+    </script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Professional SEO Meta Tags -->
+    <title>Page Not Found (404) - Tom Lim | Professional Developer Portfolio</title>
+    <meta name="description" content="The page you're looking for couldn't be found. Explore Tom Lim's professional developer portfolio instead.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Professional Favicons -->
+    <link rel="icon" type="image/x-icon" href="{% static 'main/favicons/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/favicons/favicon-32x32.png' %}">
+    
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+    <!-- Floating organic shapes for minimalist background -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+    <div class="bg-shape bg-shape-4"></div>
+    <div class="bg-shape bg-shape-5"></div>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Tom Lim</div>
+                <nav class="nav">
+                    <a href="{% url 'homepage' %}">Chat</a>
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="error-page">
+                <div class="error-content">
+                    <div class="error-icon">🔍</div>
+                    <h1 class="error-title">Page Not Found</h1>
+                    <p class="error-code">Error 404</p>
+                    
+                    <div class="error-description">
+                        <p>The page you're looking for seems to have wandered off into the digital void. But don't worry – even the best developers encounter 404s!</p>
+                    </div>
+                    
+                    <div class="error-suggestions">
+                        <h3>Here are some professional alternatives:</h3>
+                        <div class="suggestion-cards">
+                            <a href="{% url 'homepage' %}" class="suggestion-card">
+                                <div class="suggestion-icon">💬</div>
+                                <h4>Chat with GPT</h4>
+                                <p>Experience my AI-powered chat application</p>
+                            </a>
+                            
+                            <a href="{% url 'about' %}" class="suggestion-card">
+                                <div class="suggestion-icon">👨‍💻</div>
+                                <h4>Professional Profile</h4>
+                                <p>Learn about my experience and skills</p>
+                            </a>
+                            
+                            <a href="{% url 'contact' %}" class="suggestion-card">
+                                <div class="suggestion-icon">📧</div>
+                                <h4>Get in Touch</h4>
+                                <p>Connect for professional opportunities</p>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="error-actions">
+                        <button onclick="history.back()" class="cta-button secondary">
+                            <span>←</span> Go Back
+                        </button>
+                        <a href="{% url 'homepage' %}" class="cta-button primary">
+                            <span>🏠</span> Home Page
+                        </a>
+                    </div>
+                    
+                    <div class="error-help">
+                        <p><strong>Still need help?</strong> If you believe this is an error, please <a href="{% url 'contact' %}">contact me</a> and I'll investigate promptly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Tom Lim</h4>
+                    <p>Full Stack Developer & AI Specialist</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/tomlim" target="_blank" rel="noopener" aria-label="LinkedIn Profile">🔗</a>
+                        <a href="https://github.com/tl375" target="_blank" rel="noopener" aria-label="GitHub Profile">⚖️</a>
+                        <a href="mailto:tom@tomlim.dev" aria-label="Email Contact">📧</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="{% url 'homepage' %}">Chat</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Professional</h4>
+                    <ul>
+                        <li><a href="{% static 'main/files/tom-lim-resume.pdf' %}" download>Resume (PDF)</a></li>
+                        <li><a href="https://linkedin.com/in/tomlim" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://github.com/tl375" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tom Lim. Professional Portfolio. Built with Django & Modern Web Standards.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .error-page {
+            max-width: 800px;
+            margin: 4rem auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        .error-content {
+            background: var(--background);
+            padding: 4rem 3rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .error-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .error-code {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .error-description {
+            margin-bottom: 3rem;
+        }
+        
+        .error-description p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .error-suggestions {
+            margin-bottom: 3rem;
+        }
+        
+        .error-suggestions h3 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+        
+        .suggestion-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .suggestion-card {
+            background: var(--background-secondary);
+            padding: 2rem 1.5rem;
+            border-radius: 0.8rem;
+            border: 1px solid var(--border-light);
+            text-decoration: none;
+            color: inherit;
+            transition: all var(--animation-normal) var(--easing-standard);
+        }
+        
+        .suggestion-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--text-secondary);
+        }
+        
+        .suggestion-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .suggestion-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .suggestion-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .error-help {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .error-help p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .error-help a {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .error-content {
+                padding: 3rem 2rem;
+            }
+            
+            .error-title {
+                font-size: 2.2rem;
+            }
+            
+            .suggestion-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</body>
+</html>
