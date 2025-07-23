@@ -186,7 +186,9 @@ a:hover {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
-    animation: messageSlide 0.3s ease-out;
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+    animation: messageSlideIn var(--animation-normal) var(--easing-decelerate) forwards;
 }
 
 .user-message {
@@ -246,14 +248,18 @@ a:hover {
     color: rgba(255, 255, 255, 0.8);
 }
 
-@keyframes messageSlide {
+@keyframes messageSlideIn {
     0% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(15px) scale(0.95);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(5px) scale(0.98);
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -314,14 +320,22 @@ a:hover {
     margin-top: 0.75rem;
     color: var(--text-light);
     font-size: 0.85rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp var(--animation-normal) var(--easing-decelerate) forwards;
 }
 
 .typing-indicator span {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--text-secondary);
-    animation: typing 1.4s ease-in-out infinite;
+    animation: typingBounce 1.6s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: 0s;
 }
 
 .typing-indicator span:nth-child(2) {
@@ -332,14 +346,25 @@ a:hover {
     animation-delay: 0.4s;
 }
 
-@keyframes typing {
+@keyframes typingBounce {
     0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.3;
+        transform: translateY(0) scale(1);
+        opacity: 0.4;
     }
     30% {
-        transform: translateY(-8px);
+        transform: translateY(-12px) scale(1.1);
         opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
