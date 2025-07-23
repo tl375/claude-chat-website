@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /static/admin/
+
+# Professional sitemap location
+Sitemap: https://tomlim.dev/sitemap.xml
+
+# Professional crawling instructions
+Crawl-delay: 1
+
+# Allow search engines to find important professional pages
+Allow: /about/
+Allow: /contact/
+Allow: /static/main/files/tom-lim-resume.pdf
