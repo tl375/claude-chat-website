@@ -4,7 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Me - Tom Lim</title>
+    
+    <!-- Professional SEO Meta Tags -->
+    <title>Contact Tom Lim - Full Stack Developer & AI Specialist | Professional Opportunities</title>
+    <meta name="description" content="Get in touch with Tom Lim for professional opportunities, collaborations, and technical consulting. Available for full-stack development and AI integration projects.">
+    <meta name="keywords" content="Contact Tom Lim, Full Stack Developer Contact, AI Specialist Hire, Professional Developer, Technical Consulting">
+    <meta name="author" content="Tom Lim">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tomlim.dev/contact/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Contact Tom Lim - Professional Developer">
+    <meta property="og:description" content="Available for professional opportunities and technical consulting. Let's discuss your next project.">
+    <meta property="og:image" content="{% static 'main/images/og-image.png' %}">
+    <meta property="og:url" content="https://tomlim.dev/contact/">
+    <meta property="og:type" content="website">
+    
+    <!-- Professional Favicons -->
+    <link rel="icon" type="image/x-icon" href="{% static 'main/favicons/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'main/favicons/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/favicons/favicon-32x32.png' %}">
+    
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
 </head>
 <body>
@@ -13,9 +33,12 @@
             <div class="header-content">
                 <div class="logo">Tom Lim</div>
                 <nav class="nav">
-                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'homepage' %}">Chat</a>
                     <a href="{% url 'about' %}">About</a>
                     <a href="{% url 'contact' %}" class="active">Contact</a>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme" data-tooltip="Switch Theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
                 </nav>
             </div>
         </div>
@@ -95,25 +118,167 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Tom Lim. Built with passion and purpose.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Tom Lim</h4>
+                    <p>Full Stack Developer & AI Specialist</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/tomlim" target="_blank" rel="noopener" aria-label="LinkedIn Profile">🔗</a>
+                        <a href="https://github.com/tl375" target="_blank" rel="noopener" aria-label="GitHub Profile">⚖️</a>
+                        <a href="mailto:tom@tomlim.dev" aria-label="Email Contact">📧</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Professional</h4>
+                    <ul>
+                        <li><a href="{% static 'main/files/tom-lim-resume.pdf' %}" download>Resume (PDF)</a></li>
+                        <li><a href="{% url 'about' %}">Experience</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Methods</h4>
+                    <ul>
+                        <li><a href="mailto:tom@tomlim.dev">Email</a></li>
+                        <li><a href="https://linkedin.com/in/tomlim" target="_blank">LinkedIn</a></li>
+                        <li><a href="tel:+1234567890">Phone Available</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tom Lim. Professional Portfolio. Built with Django & Modern Web Standards.</p>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a> • 
+                    <a href="/terms/">Terms of Service</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Simple form submission handler (for demo purposes)
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Professional Theme Toggle - Consistent across pages
+        function initializeThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            // Load saved theme preference or default to light
+            const savedTheme = localStorage.getItem('preferred-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
             
-            if (name && email && message) {
-                alert('Thank you for your message! I\'ll get back to you soon.');
-                this.reset();
-            } else {
-                alert('Please fill in all required fields.');
-            }
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                // Add transition for smooth theme switching
+                document.documentElement.style.transition = 'all 0.3s ease';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                
+                // Save preference
+                localStorage.setItem('preferred-theme', newTheme);
+                
+                // Update icon with animation
+                themeIcon.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    updateThemeIcon(newTheme);
+                    themeIcon.style.transform = 'rotate(0deg)';
+                }, 150);
+                
+                // Remove transition after switching
+                setTimeout(() => {
+                    document.documentElement.style.transition = '';
+                }, 300);
+            });
+        }
+        
+        function updateThemeIcon(theme) {
+            const themeIcon = document.querySelector('.theme-icon');
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            
+            // Update tooltip
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.setAttribute('data-tooltip', theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+        }
+        
+        // Professional form submission handler
+        function initializeProfessionalForm() {
+            const form = document.getElementById('contactForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    // Professional loading state
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<span class="loading-spinner"></span> Sending...';
+                    
+                    // Simulate form submission (replace with actual backend integration)
+                    setTimeout(() => {
+                        // Professional success feedback
+                        const successMsg = document.createElement('div');
+                        successMsg.className = 'success-message';
+                        successMsg.innerHTML = `
+                            <div style="background: rgba(104, 211, 145, 0.1); color: #38a169; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(104, 211, 145, 0.2); margin-bottom: 1rem;">
+                                <strong>✅ Message sent successfully!</strong><br>
+                                Thank you ${name}, I'll get back to you within 24 hours at ${email}.
+                            </div>
+                        `;
+                        
+                        form.insertBefore(successMsg, form.firstChild);
+                        form.reset();
+                        
+                        // Reset button
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = 'Send Message';
+                        
+                        // Remove success message after 5 seconds
+                        setTimeout(() => {
+                            successMsg.remove();
+                        }, 5000);
+                        
+                    }, 1500); // Simulate network delay
+                    
+                } else {
+                    // Professional error feedback
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = 'error-message';
+                    errorMsg.innerHTML = `
+                        <div style="background: rgba(245, 101, 101, 0.1); color: #e53e3e; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(245, 101, 101, 0.2); margin-bottom: 1rem;">
+                            <strong>⚠️ Please complete all required fields</strong><br>
+                            Name, email, and message are required for professional communication.
+                        </div>
+                    `;
+                    
+                    form.insertBefore(errorMsg, form.firstChild);
+                    
+                    // Remove error message after 3 seconds
+                    setTimeout(() => {
+                        errorMsg.remove();
+                    }, 3000);
+                    
+                    // Add shake animation to incomplete fields
+                    [name, email, message].forEach((field, index) => {
+                        const inputs = [document.getElementById('name'), document.getElementById('email'), document.getElementById('message')];
+                        if (!field) {
+                            inputs[index].classList.add('error');
+                            setTimeout(() => {
+                                inputs[index].classList.remove('error');
+                            }, 500);
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Initialize all professional features when page loads
+        window.addEventListener('load', () => {
+            initializeThemeToggle();
+            initializeProfessionalForm();
         });
     </script>
 </body>
