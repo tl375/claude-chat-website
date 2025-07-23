@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Chat - Tom Lim</title>
+    <title>GPT Chat - Tom Lim</title>
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
 </head>
 <body>
@@ -25,16 +25,16 @@
         <div class="container">
             <div class="chat-section">
                 <div class="chat-header">
-                    <h1>Claude Chat Assistant</h1>
+                    <h1>GPT Chat Assistant</h1>
                     <p>Ask me anything - I'm here to help!</p>
                 </div>
                 
                 <div class="chat-container">
                     <div class="chat-messages" id="chatMessages">
                         <div class="message bot-message">
-                            <div class="message-avatar">Claude</div>
+                            <div class="message-avatar">GPT</div>
                             <div class="message-content">
-                                <p>Hello! I'm Claude, your AI assistant. How can I help you today?</p>
+                                <p>Hello! I'm ChatGPT, your AI assistant. How can I help you today?</p>
                                 <span class="message-time">Just now</span>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Tom Lim. Powered by Anthropic Claude.</p>
+            <p>&copy; 2024 Tom Lim. Powered by OpenAI.</p>
         </div>
     </footer>
 
@@ -76,7 +76,7 @@
             
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
-            avatar.textContent = isUser ? 'You' : 'Claude';
+            avatar.textContent = isUser ? 'You' : 'GPT';
             
             const messageContent = document.createElement('div');
             messageContent.className = 'message-content';

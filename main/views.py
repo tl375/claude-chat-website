@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import os
-from anthropic import Anthropic
+from openai import OpenAI
 
 # Load environment variables from .env file
 try:
@@ -31,31 +31,35 @@ def chat_api(request):
             data = json.loads(request.body)
             user_message = data.get('message', '')
             
-            # Get Claude API key from environment variable
-            api_key = os.getenv('ANTHROPIC_API_KEY')
+            # Get OpenAI API key from environment variable
+            api_key = os.getenv('OPENAI_API_KEY')
             
             if not api_key:
                 return JsonResponse({
-                    'response': 'Claude API key not configured. Please set ANTHROPIC_API_KEY environment variable.',
+                    'response': 'OpenAI API key not configured. Please set OPENAI_API_KEY environment variable.',
                     'status': 'error'
                 })
             
-            # Initialize Claude client
-            client = Anthropic(api_key=api_key)
+            # Initialize OpenAI client
+            client = OpenAI(api_key=api_key)
             
-            # Make API call to Claude
-            response = client.messages.create(
-                model="claude-3-5-sonnet-20241022",
+            # Make API call to OpenAI GPT
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
                 max_tokens=500,
                 messages=[
                     {
-                        "role": "user", 
-                        "content": f"You are a helpful AI assistant. Provide clear, concise, and helpful responses.\n\nUser: {user_message}"
+                        "role": "system", 
+                        "content": "You are a helpful AI assistant. Provide clear, concise, and helpful responses."
+                    },
+                    {
+                        "role": "user",
+                        "content": user_message
                     }
                 ]
             )
             
-            response_message = response.content[0].text.strip()
+            response_message = response.choices[0].message.content.strip()
             
             return JsonResponse({
                 'response': response_message,
@@ -64,17 +68,17 @@ def chat_api(request):
             
         except Exception as e:
             # Log the actual error for debugging
-            print(f"Claude API Error: {str(e)}")
+            print(f"OpenAI API Error: {str(e)}")
             
             # Check specific error types
-            if "invalid_api_key" in str(e).lower():
+            if "invalid_api_key" in str(e).lower() or "authentication" in str(e).lower():
                 return JsonResponse({
-                    'response': 'API key is invalid. Please check your Claude API key configuration.',
+                    'response': 'API key is invalid. Please check your OpenAI API key configuration.',
                     'status': 'error'
                 })
-            elif "insufficient_quota" in str(e).lower() or "exceeded your current quota" in str(e).lower():
+            elif "rate_limit" in str(e).lower() or "quota" in str(e).lower():
                 return JsonResponse({
-                    'response': 'Claude API quota exceeded. Please add credits to your Anthropic account at https://console.anthropic.com/',
+                    'response': 'OpenAI API quota exceeded or rate limit hit. Please check your usage at https://platform.openai.com/',
                     'status': 'error'
                 })
             else:

@@ -1,4 +1,4 @@
-// Futuristic Claude Chat Interface JavaScript
+// Futuristic GPT Chat Interface JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const avatarText = document.createElement('span');
-        avatarText.textContent = isUser ? 'YOU' : 'CLAUDE';
+        avatarText.textContent = isUser ? 'YOU' : 'GPT';
         avatarDiv.appendChild(avatarText);
 
         const contentDiv = document.createElement('div');
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function showTypingIndicator() {
         typingIndicator.style.display = 'flex';
         typingIndicator.innerHTML = `
-            <span>Claude is thinking</span>
+            <span>GPT is thinking</span>
             <span></span>
             <span></span>
             <span></span>
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, 1000);
 
-    console.log('🤖 Claude Interface initialized successfully');
+    console.log('🤖 GPT Interface initialized successfully');
     console.log('🔹 All systems operational');
     console.log('🔹 Ready for user interaction');
 });
