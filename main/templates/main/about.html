@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Tom Lim</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Tom Lim</div>
+                <nav class="nav">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'about' %}" class="active">About</a>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="about-section">
+                <div class="text-center">
+                    <div style="width: 200px; height: 200px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #3b82f6); margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; font-weight: bold;">TL</div>
+                    <h1>About Me</h1>
+                    <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">I'm a passionate developer who loves creating digital experiences that make a difference.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Background</h3>
+                        <p>With a passion for technology and problem-solving, I've dedicated my career to building innovative solutions that bridge the gap between complex technical challenges and user-friendly experiences.</p>
+                        <p>I believe in continuous learning, clean code, and the power of collaboration to create meaningful impact.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Experience</h3>
+                        <p>Over the years, I've worked on various projects ranging from web applications to system architecture, always focusing on delivering quality solutions that meet both user needs and business objectives.</p>
+                        <p>I enjoy working with teams that value innovation, quality, and user-centered design principles.</p>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <h3>Skills & Technologies</h3>
+                    <p>I work with a variety of technologies and am always eager to learn new ones. Here are some of the tools and technologies I'm proficient with:</p>
+                    
+                    <div class="skills-list">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">API Development</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Philosophy</h3>
+                        <p>I believe in writing clean, maintainable code that stands the test of time. User experience is paramount, and every line of code should serve a purpose in creating something meaningful.</p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li>User-first approach to development</li>
+                            <li>Clean, readable, and maintainable code</li>
+                            <li>Continuous learning and improvement</li>
+                            <li>Collaborative problem-solving</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Interests</h3>
+                        <p>When I'm not coding, you can find me exploring new technologies, reading about industry trends, or working on personal projects that challenge me to grow.</p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Open source contributions</li>
+                            <li>AI and machine learning</li>
+                            <li>Web performance optimization</li>
+                            <li>Design systems and accessibility</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <h3>Let's Work Together</h3>
+                    <p>I'm always interested in new opportunities and collaborations. Whether you have a project in mind or just want to connect, I'd love to hear from you.</p>
+                    <a href="{% url 'contact' %}" class="cta-button">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Tom Lim. Built with passion and purpose.</p>
+        </div>
+    </footer>
+</body>
+</html>

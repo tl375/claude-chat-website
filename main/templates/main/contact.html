@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me - Tom Lim</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Tom Lim</div>
+                <nav class="nav">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'contact' %}" class="active">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="contact-section">
+                <div class="text-center mb-4">
+                    <h1>Get In Touch</h1>
+                    <p style="font-size: 1.25rem; max-width: 500px; margin: 0 auto;">I'd love to hear from you. Whether you have a project in mind, want to collaborate, or just want to say hello, feel free to reach out.</p>
+                </div>
+
+                <form class="contact-form" method="post" action="#" id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name *</label>
+                        <input type="text" id="name" name="name" class="form-input" required placeholder="Your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" id="email" name="email" class="form-input" required placeholder="your.email@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-input" placeholder="What's this about?">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message *</label>
+                        <textarea id="message" name="message" class="form-input form-textarea" required placeholder="Tell me about your project, idea, or just say hello..."></textarea>
+                    </div>
+
+                    <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
+                </form>
+
+                <div class="contact-info">
+                    <h3>Other Ways to Reach Me</h3>
+                    
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <a href="mailto:tom@example.com">tom@example.com</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="https://linkedin.com/in/tomlim" target="_blank">LinkedIn Profile</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span>🐙</span>
+                        <a href="https://github.com/tomlim" target="_blank">GitHub Profile</a>
+                    </div>
+
+                    <div class="contact-item">
+                        <span>🌍</span>
+                        <span>Based in San Francisco, CA</span>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <h3>Let's Create Something Amazing</h3>
+                    <p>I'm always excited to work on interesting projects and collaborate with passionate people. Whether you're looking for:</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem; color: var(--text-secondary);">
+                        <li>Web application development</li>
+                        <li>System architecture and design</li>
+                        <li>Technical consultation</li>
+                        <li>Code review and optimization</li>
+                        <li>Team collaboration</li>
+                    </ul>
+                    <p>I'm here to help bring your ideas to life. Let's start a conversation!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Tom Lim. Built with passion and purpose.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form submission handler (for demo purposes)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && message) {
+                alert('Thank you for your message! I\'ll get back to you soon.');
+                this.reset();
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+    </script>
+</body>
+</html>
