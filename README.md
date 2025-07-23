@@ -1,10 +1,10 @@
-# Claude Chat Website
+# GPT Chat Website
 
-A modern Django web application featuring a futuristic chat interface powered by Anthropic's Claude AI.
+A modern Django web application featuring a futuristic chat interface powered by OpenAI's GPT.
 
 ## Features
 
-- 🤖 **Claude AI Integration**: Chat with Anthropic's Claude using the latest API
+- 🤖 **GPT AI Integration**: Chat with OpenAI's GPT using the latest API
 - 🎨 **Futuristic UI**: Modern, responsive design with glowing effects and animations
 - ⚡ **Real-time Chat**: Interactive chat interface with typing indicators
 - 🎪 **Visual Effects**: Particle animations, glitch effects, and smooth transitions
@@ -13,7 +13,7 @@ A modern Django web application featuring a futuristic chat interface powered by
 ## Tech Stack
 
 - **Backend**: Django 4.2.23
-- **AI**: Anthropic Claude API (claude-3-5-sonnet-20241022)
+- **AI**: OpenAI GPT API (gpt-3.5-turbo)
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
 - **Database**: SQLite (default)
 - **Python**: 3.9+
@@ -23,7 +23,7 @@ A modern Django web application featuring a futuristic chat interface powered by
 ### Prerequisites
 
 - Python 3.9 or higher
-- Anthropic API key
+- OpenAI API key
 
 ### Installation
 
@@ -48,9 +48,9 @@ A modern Django web application featuring a futuristic chat interface powered by
    ```bash
    cp .env.example .env
    ```
-   Edit `.env` and add your Anthropic API key:
+   Edit `.env` and add your OpenAI API key:
    ```
-   ANTHROPIC_API_KEY=your_claude_api_key_here
+   OPENAI_API_KEY=your_openai_api_key_here
    ```
 
 5. **Run database migrations**
@@ -82,7 +82,7 @@ testWebsite/
 │   ├── wsgi.py         # WSGI configuration
 │   └── asgi.py         # ASGI configuration
 └── main/               # Main Django app
-    ├── views.py        # View functions (Claude API integration)
+    ├── views.py        # View functions (GPT API integration)
     ├── urls.py         # App URL patterns
     ├── models.py       # Database models
     ├── static/         # Static files (CSS, JS)
@@ -100,11 +100,11 @@ testWebsite/
 
 ## API Configuration
 
-This application uses Anthropic's Claude API. You'll need to:
+This application uses OpenAI's GPT API. You'll need to:
 
-1. Sign up for an Anthropic account at [console.anthropic.com](https://console.anthropic.com/)
+1. Sign up for an OpenAI account at [platform.openai.com](https://platform.openai.com/)
 2. Generate an API key
-3. Add the key to your `.env` file as `ANTHROPIC_API_KEY`
+3. Add the key to your `.env` file as `OPENAI_API_KEY`
 
 ## Development
 
@@ -127,13 +127,13 @@ python manage.py collectstatic
 ## Features in Detail
 
 ### Chat Interface
-- Real-time messaging with Claude AI
+- Real-time messaging with GPT AI
 - Typing indicators and message animations
 - Particle effects on message send
 - Responsive design for all screen sizes
 
 ### AI Integration
-- Uses Claude 3.5 Sonnet model
+- Uses GPT-3.5-turbo model
 - Handles API errors gracefully
 - Configurable response parameters
 - Fallback responses for service interruptions
@@ -161,13 +161,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 If you encounter any issues or have questions:
 
 1. Check the [CLAUDE.md](CLAUDE.md) file for development guidance
-2. Review the Django and Anthropic API documentation
+2. Review the Django and OpenAI API documentation
 3. Open an issue in the GitHub repository
 
 ## Acknowledgments
 
 - Built with Django web framework
-- Powered by Anthropic's Claude AI
+- Powered by OpenAI's GPT
 - Inspired by futuristic UI design trends
 - Uses modern web technologies for optimal performance
 
