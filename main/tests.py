@@ -176,3 +176,35 @@ class ChatAPITestCase(TestCase):
                 # Verify empty string was passed to API
                 call_args = mock_client.chat.completions.create.call_args
                 self.assertEqual(call_args[1]['messages'][1]['content'], '')
+
+
+class HomepageViewTestCase(TestCase):
+    """Test cases for the homepage view and background elements"""
+    
+    def setUp(self):
+        self.client = Client()
+        self.homepage_url = reverse('homepage')
+    
+    def test_homepage_renders_successfully(self):
+        """Test that homepage renders without errors"""
+        response = self.client.get(self.homepage_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'GPT Chat Assistant')
+    
+    def test_background_shapes_included(self):
+        """Test that background shapes are included in homepage template - Issue #5"""
+        response = self.client.get(self.homepage_url)
+        self.assertEqual(response.status_code, 200)
+        
+        # Verify all 5 background shape divs are present
+        for i in range(1, 6):
+            self.assertContains(response, f'bg-shape bg-shape-{i}')
+        
+        # Verify background shapes comment is present
+        self.assertContains(response, 'Floating organic shapes for minimalist background')
+    
+    def test_css_styles_loaded(self):
+        """Test that CSS styles are properly loaded"""
+        response = self.client.get(self.homepage_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'main/css/style.css')
