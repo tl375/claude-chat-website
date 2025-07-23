@@ -83,6 +83,9 @@
                     <a href="{% url 'homepage' %}" class="active">Chat</a>
                     <a href="{% url 'about' %}">About</a>
                     <a href="{% url 'contact' %}">Contact</a>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme" data-tooltip="Switch Theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
                 </nav>
             </div>
         </div>
@@ -475,6 +478,212 @@
         
         // Initialize animations when page loads
         window.addEventListener('load', initializeAllAnimations);
+        
+        // Professional Theme Toggle - Phase 4
+        function initializeThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
+            
+            // Load saved theme preference or default to light
+            const savedTheme = localStorage.getItem('preferred-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                // Add transition for smooth theme switching
+                document.documentElement.style.transition = 'all 0.3s ease';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                
+                // Save preference
+                localStorage.setItem('preferred-theme', newTheme);
+                
+                // Update icon with animation
+                themeIcon.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    updateThemeIcon(newTheme);
+                    themeIcon.style.transform = 'rotate(0deg)';
+                }, 150);
+                
+                // Remove transition after switching
+                setTimeout(() => {
+                    document.documentElement.style.transition = '';
+                }, 300);
+                
+                // Professional analytics (could be expanded)
+                console.log(`Professional Theme Switch: ${newTheme} mode activated`);
+            });
+        }
+        
+        function updateThemeIcon(theme) {
+            const themeIcon = document.querySelector('.theme-icon');
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            
+            // Update tooltip
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.setAttribute('data-tooltip', theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+        }
+        
+        // Professional Keyboard Shortcuts - Phase 4
+        function initializeKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                // Ctrl/Cmd + Enter to send message
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && document.activeElement === chatInput) {
+                    e.preventDefault();
+                    sendMessage();
+                    
+                    // Visual feedback
+                    sendButton.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        sendButton.style.transform = '';
+                    }, 100);
+                }
+                
+                // Escape to clear input
+                if (e.key === 'Escape' && document.activeElement === chatInput) {
+                    chatInput.value = '';
+                    chatInput.blur();
+                }
+                
+                // Alt + T for theme toggle
+                if (e.altKey && e.key.toLowerCase() === 't') {
+                    e.preventDefault();
+                    document.getElementById('themeToggle').click();
+                }
+                
+                // F1 for help/shortcuts
+                if (e.key === 'F1') {
+                    e.preventDefault();
+                    showKeyboardShortcuts();
+                }
+            });
+        }
+        
+        function showKeyboardShortcuts() {
+            const shortcutsModal = document.createElement('div');
+            shortcutsModal.className = 'shortcuts-modal';
+            shortcutsModal.innerHTML = `
+                <div class="shortcuts-content">
+                    <div class="shortcuts-header">
+                        <h3>⌨️ Keyboard Shortcuts</h3>
+                        <button class="close-shortcuts" onclick="this.parentElement.parentElement.parentElement.remove()">×</button>
+                    </div>
+                    <div class="shortcuts-list">
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>Ctrl</kbd> + <kbd>Enter</kbd></span>
+                            <span class="shortcut-desc">Send message</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>Esc</kbd></span>
+                            <span class="shortcut-desc">Clear input</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>Alt</kbd> + <kbd>T</kbd></span>
+                            <span class="shortcut-desc">Toggle theme</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>F1</kbd></span>
+                            <span class="shortcut-desc">Show shortcuts</span>
+                        </div>
+                    </div>
+                    <div class="shortcuts-footer">
+                        <p>Professional keyboard navigation • Enhanced productivity</p>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(shortcutsModal);
+            
+            // Auto-close after 5 seconds
+            setTimeout(() => {
+                if (shortcutsModal.parentElement) {
+                    shortcutsModal.remove();
+                }
+            }, 5000);
+        }
+        
+        // Professional Message Export - Phase 4
+        function initializeMessageExport() {
+            // Add export button to chat header (could be expanded)
+            const chatHeader = document.querySelector('.chat-header');
+            const exportButton = document.createElement('button');
+            exportButton.className = 'export-button tooltip';
+            exportButton.setAttribute('data-tooltip', 'Export Chat History');
+            exportButton.innerHTML = '📄 Export';
+            exportButton.onclick = exportChatHistory;
+            
+            // Add to professional status area
+            const professionalStatus = document.querySelector('.professional-status');
+            if (professionalStatus) {
+                professionalStatus.appendChild(exportButton);
+            }
+        }
+        
+        function exportChatHistory() {
+            const messages = Array.from(document.querySelectorAll('.message')).map(msg => {
+                const isUser = msg.classList.contains('user-message');
+                const content = msg.querySelector('.message-content p').textContent;
+                const time = msg.querySelector('.message-time').textContent;
+                
+                return {
+                    sender: isUser ? 'User' : 'GPT Assistant',
+                    message: content,
+                    timestamp: time
+                };
+            });
+            
+            const exportData = {
+                title: 'GPT Chat History - Tom Lim Professional Portfolio',
+                exportDate: new Date().toISOString(),
+                totalMessages: messages.length,
+                messages: messages
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `chat-history-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            // Professional feedback
+            addMessage('📄 Chat history exported successfully! Professional JSON format with timestamps included.', false, false);
+        }
+        
+        // Enhanced Professional Initialization
+        function initializeProfessionalFeatures() {
+            initializeThemeToggle();
+            initializeKeyboardShortcuts();
+            initializeMessageExport();
+            
+            // Professional welcome message with features overview
+            setTimeout(() => {
+                const welcomeMsg = `👋 Welcome to my professional GPT chat application!
+
+🔥 Professional features available:
+• Dark/Light theme toggle (Alt+T)
+• Keyboard shortcuts (F1 for help)
+• Professional error handling & retry
+• Chat history export
+• Real-time connection status
+
+💡 Try asking about my experience, projects, or technical expertise!`;
+                
+                const existingMessages = document.querySelectorAll('.message');
+                if (existingMessages.length <= 1) { // Only show if minimal messages
+                    addMessage(welcomeMsg, false, true);
+                }
+            }, 1000);
+        }
+        
+        // Initialize all professional features when page loads
+        window.addEventListener('load', () => {
+            initializeAllAnimations();
+            initializeProfessionalFeatures();
+        });
     </script>
 </body>
 </html>
